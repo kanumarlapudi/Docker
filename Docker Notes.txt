@@ -1,0 +1,70 @@
+
+docker playground, docker hub, docker cheat sheets
+
+1. docker --version             -- to get version of docker
+2. docker image ls              -- to check what are the images present in our local system
+3. docker pull mysql            -- to get the image of mysql from docker hub to our local system by defaultly it downloads latest version
+4. docker pull mysql:8.1.0      -- to get the 8.1.0 version of mysql : this is called as tag
+5. docker run imageid           -- to run the image or to start the container
+6. docker ps -a                 -- to check the containers what are running and history also
+7. ctrl + c                     -- to close the command in docker playground
+8. docker rm containerid       -- to remove the container
+9. docker rm $(docker ps -a -q) -- to remove all the containers at a time
+10. docker ps -a -q             -- to get only container id 
+11. docker rmi imageid          -- to remove image 
+12. docker stop containerid     -- to stop the container
+13. docker run nameofimage      -- to run the image or to start the container 
+14. docker run --name anyname -P imagenameorid  -- to provide our own container name 
+15. docker ps                   -- it gives only running containers
+16. docker run -p 9090:8080 bitnami/nginx -- to give our port number(9090) default is 8080
+17. docker logs containerid/containername  -- to get all the logs
+18. docker run --name anyname -p anyportnumber -d imagename(ex:wordpress)
+19. docker build -t anyname:anytag .  -- to create or build the image
+20. docker run -d -p 3000:3000 imagename/imagetag -- -d means detached if we close the terminal also the container will be in running state
+21. docker rmi -f imageid -- to remove the image forcefully
+22. docker tag repositorynameindockerhub ourdockerusername/repositorynameindockerhub  -- to push our own created image into docker hub repository
+23. docker push ourdockerusername/repositorynameindockerhub  -- to push image into docker hub repository
+24. docker login -- if we are getting access denied we have to write this command
+
+
+
+docker connecting with network to store the data already which we have entered
+------------------------------------------------------------------------------
+-> if we write or make changes directly in docker container if it stopped then our data will be deletd to store that data we must know about volume mounting we can achieve this by network.
+-> volume mounting (-v) -- todo-mysql-data:/var/lib/mysql  --  todo-mysql-data -> it is the path of our docker mysql , /var/lib/mysql -> this is the path of our local system.
+
+
+1.  docker network create anyname(todo-app)  -- to create a network
+2.  docker run -d `
+    --network todo-app --network-alias mysql `
+    -v todo-mysql-data:/var/lib/mysql `
+    -e MYSQL_ROOT_PASSWORD=secret `
+    -e MYSQL_DATABASE=todos`
+    mysql:8.0     -- ` this refers to next line or new line, -v is volume mounting
+3. docker exec -it containerid mysql -u root -p
+ 
+nicolaka/netshoot image - it helps in creating network and creating a communication between two containers
+
+4. docker run -it --network todo-app nicolaka/netshoot
+5. dig mysql
+
+
+-> know about volume mounting -v
+-> learn how to create docker image
+-> docker desktop is not working in my pc
+-> learn how to create a network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
